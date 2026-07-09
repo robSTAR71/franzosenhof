@@ -453,23 +453,30 @@
 
   function renderHeader(){
     var tt = t();
-    var logo = '<a href="#home" style="text-decoration:none;display:flex;align-items:center;gap:12px;min-width:0;">'
-      + '<img src="https://www.franzosenhof.at/wp-content/uploads/2014/06/cropped-logo.png" alt="Franzosenhof Logo" style="height:68px;width:68px;flex:none;object-fit:contain;border-radius:999px;background:var(--cream-card);border:2px solid var(--border);box-shadow:0 4px 14px rgba(44,35,28,0.14);padding:4px;"/>'
-      + '<span style="display:flex;flex-direction:column;line-height:1.1;min-width:0;">'
-      + '<span style="font-family:\'Lora\',serif;font-weight:700;font-size:21px;color:var(--ink);letter-spacing:0.01em;white-space:nowrap;">Franzosenhof</span>'
-      + '<span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-2);white-space:nowrap;">Gasthaus &amp; Zimmer</span>'
+    var logoImgSize = state.isNarrow ? 44 : 68;
+    var logo = '<a href="#home" style="text-decoration:none;display:flex;align-items:center;gap:' + (state.isNarrow ? '8px' : '12px') + ';min-width:0;overflow:hidden;">'
+      + '<img src="https://www.franzosenhof.at/wp-content/uploads/2014/06/cropped-logo.png" alt="Franzosenhof Logo" style="height:' + logoImgSize + 'px;width:' + logoImgSize + 'px;flex:none;object-fit:contain;border-radius:999px;background:var(--cream-card);border:2px solid var(--border);box-shadow:0 4px 14px rgba(44,35,28,0.14);padding:4px;"/>'
+      + '<span style="display:flex;flex-direction:column;line-height:1.1;min-width:0;overflow:hidden;">'
+      + '<span style="font-family:\'Lora\',serif;font-weight:700;font-size:' + (state.isNarrow ? '17px' : '21px') + ';color:var(--ink);letter-spacing:0.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Franzosenhof</span>'
+      + (state.isNarrow ? '' : '<span style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted-2);white-space:nowrap;">Gasthaus &amp; Zimmer</span>')
       + '</span></a>';
 
     var rightSide;
     if (state.isMobile) {
-      rightSide = '<div style="display:flex;align-items:center;gap:10px;">'
-        + weatherWidgetHtml()
-        + langSwitcherHtml(true)
-        + (!state.isNarrow ? '<a href="tel:+4379498284" class="phone-pill">Tel. +43 7949 8284</a>' : '')
-        + '<button type="button" aria-label="' + escAttr(tt.menuOpenLabel) + '" data-action="toggle-menu" class="hamburger-btn">'
-        + '<span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span>'
-        + '</button>'
-        + '</div>';
+      if (state.isNarrow) {
+        rightSide = '<button type="button" aria-label="' + escAttr(tt.menuOpenLabel) + '" data-action="toggle-menu" class="hamburger-btn">'
+          + '<span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span>'
+          + '</button>';
+      } else {
+        rightSide = '<div style="display:flex;align-items:center;gap:10px;">'
+          + weatherWidgetHtml()
+          + langSwitcherHtml(true)
+          + '<a href="tel:+4379498284" class="phone-pill">Tel. +43 7949 8284</a>'
+          + '<button type="button" aria-label="' + escAttr(tt.menuOpenLabel) + '" data-action="toggle-menu" class="hamburger-btn">'
+          + '<span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span>'
+          + '</button>'
+          + '</div>';
+      }
     } else {
       var navLinks = NAV_HREFS.map(function(href, i){ return '<a href="' + href + '" class="nav-link">' + escHtml(tt.navLabels[i]) + '</a>'; }).join('');
       rightSide = '<nav style="display:flex;gap:22px;flex-wrap:wrap;align-items:center;">' + navLinks + '</nav>'
@@ -488,7 +495,11 @@
     var links = NAV_HREFS.map(function(href, i){
       return '<a href="' + href + '" data-action="close-menu" class="mobile-menu-link">' + escHtml(tt.navLabels[i]) + '</a>';
     }).join('');
+    var narrowExtras = state.isNarrow
+      ? '<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:4px 0 12px;">' + langSwitcherHtml(true) + weatherWidgetHtml() + '</div>'
+      : '';
     return '<div style="position:sticky;top:80px;z-index:49;background:var(--cream-card);border-bottom:1px solid #e3d7c1;padding:20px clamp(20px,6vw,40px);display:flex;flex-direction:column;gap:4px;box-shadow:0 12px 24px rgba(44,35,28,0.08);">'
+      + narrowExtras
       + links
       + '<a href="tel:+4379498284" style="text-decoration:none;background:var(--green);color:var(--cream-card);text-align:center;padding:13px;border-radius:10px;font-size:15px;font-weight:600;margin-top:12px;">' + escHtml(tt.callMobile) + '</a>'
       + '</div>';
