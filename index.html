@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Franzosenhof — Gasthaus &amp; Zimmer</title>
 <meta name="description" content="Franzosenhof — Gasthaus, Zimmer &amp; Camping Stellplatz in Wullowitz, Mühlviertel, nahe Freistadt und der tschechischen Grenze.">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -455,7 +460,7 @@
     var tt = t();
     var logoImgSize = state.isNarrow ? 44 : 68;
     var logo = '<a href="#home" style="text-decoration:none;display:flex;align-items:center;gap:' + (state.isNarrow ? '8px' : '12px') + ';min-width:0;overflow:hidden;">'
-      + '<img src="https://www.franzosenhof.at/wp-content/uploads/2014/06/cropped-logo.png" alt="Franzosenhof Logo" style="height:' + logoImgSize + 'px;width:' + logoImgSize + 'px;flex:none;object-fit:contain;border-radius:999px;background:var(--cream-card);border:2px solid var(--border);box-shadow:0 4px 14px rgba(44,35,28,0.14);padding:4px;"/>'
+      + '<img src="assets/logo.svg" alt="Franzosenhof Logo" style="height:' + logoImgSize + 'px;width:' + logoImgSize + 'px;flex:none;object-fit:cover;border-radius:999px;box-shadow:0 4px 14px rgba(44,35,28,0.14);"/>'
       + '<span style="display:flex;flex-direction:column;line-height:1.1;min-width:0;overflow:hidden;">'
       + '<span style="font-family:\'Lora\',serif;font-weight:700;font-size:' + (state.isNarrow ? '17px' : '21px') + ';color:var(--ink);letter-spacing:0.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Franzosenhof</span>'
       + '<span style="font-size:' + (state.isNarrow ? '9px' : '11px') + ';letter-spacing:0.1em;text-transform:uppercase;color:var(--muted-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Gasthaus &amp; Zimmer</span>'
